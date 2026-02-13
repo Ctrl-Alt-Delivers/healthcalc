@@ -3,16 +3,38 @@ Bienvenido al proyecto de la asignatura de **Ingeniería del Software Avanzada**
 
 El [Hospital Universitario Virgen de la Victoria (El Clínico)](https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hospital/virgen-victoria/) de Málaga nos ha encargado el desarrollo de una **Calculadora de Salud** (**_HealthCalc_**) que permita calcular diferentes métricas de los pacientes.
 
-## Requisitos
+![MOdelo de características de la calculadora de salud.](resources/images/healthcalc_fm.png)
 
-### Requisitos Funcionales
+## Requisitos  
 
-### Requisitos No Funcionales
+<details>
+<summary><b>Requisitos Funcionales</b></summary>
+
+- La calculadora debe dar soporte a al menos tres métricas.
+
+</details>
+
+<details>
+<summary><b>Requisitos No Funcionales</b></summary>
+
+Para que el proyecto cumpla con estándares de software médico, se deben incluir:
+- **Gestión de Errores:** Manejo de excepciones en divisiones por cero (ej. altura 0 en IMC).
+  1.  **Validación de Rangos (_Data Scrubbing_):**
+      * *Hard Limits:* Bloquear entradas imposibles (ej. altura de 3 metros).
+      * *Soft Limits:* Avisos ante valores inusuales pero posibles.
+  2.  **Soporte Multi-unidad:** Conversión automática entre sistema métrico (kg, cm) e imperial (lb, ft/in).
+  3.  **Gestión de Errores:** Manejo de excepciones en divisiones por cero (ej. altura 0 en IMC).
 - Todo el código de la aplicación (incluido los comentarios) deben estar en inglés.
+- **Privacidad (_Compliance_):** Si el software almacena datos, debe considerar la anonimización de la Información Personal Identificable (PII) bajo normativas como GDPR o HIPAA.
+
+</details>
+
+
 
 ## Métricas de HealthCalc
 
-### Métricas Antropométricas
+<details>
+<summary><b>Métricas Antropométricas</b></summary>
 
 * **M1: Índice de Masa Corporal (IMC) o _Body Mass Index (BMI)_:** El IMC es es un indicador estándar, adoptado por la [Organización Mundial de la Salud (OMS)](https://www.who.int/es), que evalúa la adecuación del peso de una persona en relación con su altura para estimar la grasa corporal.
 
@@ -25,7 +47,7 @@ El [Hospital Universitario Virgen de la Victoria (El Clínico)](https://www.sspa
       - Sobrepeso ($25-29.9$)
       - Obesidad ($\ge 30$)
 
-![Clasificación del estado nutricional de una persona.](resources/images/bmi.jpeg =300x)
+![Clasificación del estado nutricional de una persona.](resources/images/bmi.jpeg)
 
 ---
 
@@ -69,9 +91,46 @@ El [Hospital Universitario Virgen de la Victoria (El Clínico)](https://www.sspa
 
 ---
 
-### Métricas Metabólicas y Nutricionales
+* **M4: Perímetro Abdominal (PA) o _Waist Circumference_ (WC):** Es la medición lineal de la circunferencia de la cintura. Se considera el indicador clínico directo de grasa visceral más sencillo y aceptado para predecir obesidad abdominal.
+  
+    * **Valores de Referencia (Riesgo Elevado):**  
+      - **Hombres:** $\ge 94\text{ - }102 \text{ cm}$  
+      - **Mujeres:** $\ge 80\text{ - }88 \text{ cm}$
 
-* **M4: Tasa Metabólica Basal (TMB) o _Basal Metabolic Rate (BMR)_:** El TMB calcula la cantidad mínima de energía (calorías) que el cuerpo necesita en reposo absoluto. 
+---
+
+* **M5: Índice de Cintura-Cadera (ICC) o _Waist-to-Hip Ratio_ (WHR):** Es ICC la relación entre el perímetro de la cintura y el de la cadera. Se utiliza para identificar la distribución de la grasa (cuerpo tipo "manzana" o "pera") y estimar el riesgo de enfermedades cardiovasculares.
+  
+    * **Fórmula:** $ICC = \frac{\text{Circunferencia de cintura (cm)}}{\text{Circunferencia de cadera (cm)}}$
+    * **Valores de Riesgo (OMS):**  
+        - **Hombres:** $> 0.90$  
+        - **Mujeres:** $> 0.85$
+
+    Tipos de Morfología:
+
+    1.  **Cuerpo en forma de Manzana (Androide):**
+        * **Definición:** La grasa se acumula principalmente en la zona abdominal (tronco).
+        * **Implicación Clínica:** Mayor riesgo de hipertensión, diabetes tipo 2 y enfermedades cardíacas debido a la cercanía de la grasa a los órganos vitales (grasa visceral).
+        * **Criterio:** Se asigna si el ICC supera los límites de la OMS (>0.90 en hombres, >0.85 en mujeres).
+
+    2.  **Cuerpo en forma de Pera (Ginoide):**
+        * **Definición:** La grasa se almacena mayoritariamente en la cadera, glúteos y muslos.
+        * **Implicación Clínica:** Generalmente asociada a un menor riesgo metabólico que la forma de manzana, aunque puede relacionarse con problemas articulares o varices.
+        * **Criterio:** Se asigna si el ICC está dentro de los rangos normales o bajos.
+
+    | Sexo | Rango ICC | Categoría Morfológica | Riesgo de Salud |
+    | :--- | :--- | :--- | :--- |
+    | **Hombre** | $\le 0.90$ | Pera (Ginoide) | Bajo / Moderado |
+    | **Hombre** | $> 0.90$ | **Manzana (Androide)** | **Alto** |
+    | **Mujer** | $\le 0.85$ | Pera (Ginoide) | Bajo / Moderado |
+    | **Mujer** | $> 0.85$ | **Manzana (Androide)** | **Alto** |
+
+</details>
+
+<details>
+<summary><b>Métricas Metabólicas y Nutricionales</b></summary>
+
+* **M6: Tasa Metabólica Basal (TMB) o _Basal Metabolic Rate (BMR)_:** El TMB calcula la cantidad mínima de energía (calorías) que el cuerpo necesita en reposo absoluto. 
 
     Existen diferentes fórmulas para calcular el PCI:
 
@@ -103,7 +162,7 @@ El [Hospital Universitario Virgen de la Victoria (El Clínico)](https://www.sspa
 
 ---
 
-* **M5: Gasto Energético Diario Total (GEDT) o _Total Daily Energy Expenditure (TDEE)_:** El TDEE es la cantidad total de calorías que el cuerpo quema en 24 horas. Suma el metabolismo basal (funciones vitales en reposo), la actividad física, la digestión y el movimiento cotidiano. Es esencial para ajustar la nutrición (perder, ganar o mantener peso).
+* **M7: Gasto Energético Diario Total (GEDT) o _Total Daily Energy Expenditure (TDEE)_:** El TDEE es la cantidad total de calorías que el cuerpo quema en 24 horas. Suma el metabolismo basal (funciones vitales en reposo), la actividad física, la digestión y el movimiento cotidiano. Es esencial para ajustar la nutrición (perder, ganar o mantener peso).
 
     Para obtener las calorías totales que quemas al día, multiplica tu **TMB** por tu nivel de actividad:
 
@@ -113,27 +172,48 @@ El [Hospital Universitario Virgen de la Victoria (El Clínico)](https://www.sspa
     - **Fuerte** (ejercicio 6-7 días/semana): `TMB × 1.725`
     - **Muy fuerte** (atleta o trabajo físico pesado): `TMB × 1.9`
 
----
+</details>
 
-### Métricas Clínicas y Cardiovasculares
-Requieren datos de signos vitales o resultados de laboratorio.
+<details>
+<summary><b>Métricas Clínicas, Cardiovasculares, y de Función Orgánica</b></summary>
 
-* **Presión Arterial Media (PAM):** Indica la eficacia de la perfusión de los órganos vitales.
-    * **Fórmula:** $PAM = \frac{PAS + 2(PAD)}{3}$
-* **Tasa de Filtración Glomerular Estimada (eGFR):** Evalúa la función renal (Fórmulas CKD-EPI o Cockcroft-Gault).
-* **Escala NEWS2 (National Early Warning Score):** Sistema de puntuación para detectar deterioro clínico agudo basado en 7 parámetros fisiológicos.
+Estas métricas requieren datos de signos vitales o resultados de laboratorio.
 
----
+* **M8: Presión Arterial Media (PAM) o _Mean Arterial Pressure_ (MAP):** Representa la presión promedio en las arterias de un paciente durante un ciclo cardíaco completo. Se considera un mejor indicador de la perfusión (entrega de sangre) a los órganos vitales que la presión sistólica por sí sola. Un valor mínimo de 60-65 mmHg es necesario para mantener los órganos sanos.
+  
+    **Fórmula:** $PAM = \frac{PAS + 2(PAD)}{3}$  
+    *(Donde PAS = Presión Arterial Sistólica y PAD = Presión Arterial Diastólica)*.
 
-## 4. Consideraciones Técnicas de Ingeniería de Software
+--- 
 
-Para que el proyecto cumpla con estándares de software médico, se deben incluir:
+* **M9: Índice de Adiposidad Visceral (VAI) o _Visceral Adiposity Index_ (VAI):** Es un indicador empírico que estima la función del tejido adiposo visceral y el riesgo cardiometabólico. Combina medidas físicas (IMC y CC) con parámetros lipídicos (Triglicéridos y HDL).
+  
+    **Fórmulas:**  
+        - **Hombres:** $VAI = \left( \frac{CC}{39.68 + (1.88 \times IMC)} \right) \times \left( \frac{TG}{1.03} \right) \times \left( \frac{1.31}{HDL} \right)$  
+        - **Mujeres:** $VAI = \left( \frac{CC}{36.58 + (1.89 \times IMC)} \right) \times \left( \frac{TG}{0.81} \right) \times \left( \frac{1.52}{HDL} \right)$  
+    *(Donde CC = Circunferencia de Cintura en cm, TG = Triglicéridos y HDL en mmol/L)*.
 
-1.  **Validación de Rangos (Data Scrubbing):**
-    * *Hard Limits:* Bloquear entradas imposibles (ej. altura de 3 metros).
-    * *Soft Limits:* Avisos ante valores inusuales pero posibles.
-2.  **Soporte Multi-unidad:** Conversión automática entre sistema métrico (kg, cm) e imperial (lb, ft/in).
-3.  **Gestión de Errores:** Manejo de excepciones en divisiones por cero (ej. altura 0 en IMC).
-4.  **Privacidad (Compliance):** Si el software almacena datos, debe considerar la anonimización de la Información Personal Identificable (PII) bajo normativas como GDPR o HIPAA.
+--- 
 
----
+* **M10: Tasa de Filtración Glomerular Estimada (eGFR) o _Estimated Glomerular Filtration Rate_ (eGFR):** Es el "estándar de oro" para evaluar qué tan bien están filtrando la sangre los riñones. Es vital para la detección de la Enfermedad Renal Crónica (ERC) y para ajustar dosis de fármacos.
+  
+    **Fórmulas Comunes:**  
+      * **Cockcroft-Gault (Clásica):** $\frac{(140 - \text{edad}) \times \text{peso}}{72 \times \text{creatinina}} \times (0.85 \text{ si es mujer})$.  
+      * **CKD-EPI (Moderna):** Utiliza logaritmos y variables de raza/sexo para mayor precisión (es la recomendada actualmente en software clínico).  
+    * **Entradas necesarias:** Creatinina sérica (mg/dL), edad, sexo y etnia.  
+
+--- 
+
+* **M11: Escala NEWS2 o _National Early Warning Score 2_:** Es un sistema de puntuación estandarizado para detectar el deterioro clínico agudo en pacientes adultos. En lugar de una fórmula aritmética simple, es un **sistema de puntos acumulativo** basado en rangos fisiológicos.
+  
+    **Parámetros Evaluados (7):**
+      1. Frecuencia respiratoria.
+      2. Saturación de oxígeno.
+      3. Uso de oxígeno suplementario (Sí/No).
+      4. Presión arterial sistólica.
+      5. Frecuencia cardíaca (Pulso).
+      6. Nivel de conciencia (Escala ACVPU).
+      7. Temperatura.
+    * **Lógica de Software:** El sistema suma puntos (0 a 3) por cada parámetro que se desvíe de lo normal. Un puntaje de 5 o más es una "Alerta Roja" que requiere respuesta urgente.
+
+</details>
