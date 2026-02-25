@@ -33,4 +33,15 @@ public interface HealthCalc {
 	 * @throws Exception
 	 */
 	public double bmi(double weight, double height) throws InvalidHealthDataException;
+
+
+	/**
+	 * Calculate the Basal Metabolic Rate (BMR) of a person with the Katch-McArdle formula:
+	 * 
+	 * @param weight			Weight of the person (kg).
+	 * @param bodyFatPercentage	Body fat percentage of the person (0.0 to 1.0).
+	 * @return					The Basal Metabolic Rate of the person (kcal/day).
+	 * @throws InvalidHealthDataException
+	 */
+	public double bmrKatchMcArdle(double weight, double bodyFatPercentage) throws InvalidHealthDataException;
 }

@@ -47,4 +47,17 @@ public class HealthCalcImpl implements HealthCalc {
         return weight / Math.pow(height, 2);
     }
     
+    @Override
+    public double bmrKatchMcArdle(double weight, double bodyFatPercentage)
+        throws InvalidHealthDataException {
+
+    if (weight <= 0)
+        throw new InvalidHealthDataException("Peso inválido");
+
+    if (bodyFatPercentage < 0 || bodyFatPercentage > 1)
+        throw new InvalidHealthDataException("Porcentaje de grasa inválido");
+
+    double leanMass = weight * (1 - bodyFatPercentage);
+    return 370 + (21.6 * leanMass);
+    }
 }
