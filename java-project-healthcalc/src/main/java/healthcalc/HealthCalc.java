@@ -44,4 +44,6 @@ public interface HealthCalc {
 	 * @throws InvalidHealthDataException
 	 */
 	public double bmrKatchMcArdle(double weight, double bodyFatPercentage) throws InvalidHealthDataException;
+
+    public double ibwLorentz(double height);
 }
