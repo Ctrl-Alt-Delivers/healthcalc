@@ -60,4 +60,23 @@ public class HealthCalcImpl implements HealthCalc {
     double leanMass = weight * (1 - bodyFatPercentage);
     return 370 + (21.6 * leanMass);
     }
+
+    @Override
+    public double ibwLorentz(double height,char gender) throws InvalidHealthDataException {
+
+        if (height <= 0) {
+            throw new InvalidHealthDataException("Height must be positive.");
+        }
+
+        if (height < 30 || height > 250) {
+            throw new InvalidHealthDataException("Height must be within a possible biological range [30-250] cm.");
+        }
+        if (gender == 'm') {
+            return (height - 100) - ((height - 150) / 4.0);
+        } else if (gender == 'f') {
+            return (height - 100) - ((height - 150) / 2.0);
+        } else {
+            throw new InvalidHealthDataException("Gender must be 'm' or 'f'.");
+        }
+    }
 }

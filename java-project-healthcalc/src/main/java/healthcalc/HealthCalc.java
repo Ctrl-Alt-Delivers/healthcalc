@@ -45,5 +45,16 @@ public interface HealthCalc {
 	 */
 	public double bmrKatchMcArdle(double weight, double bodyFatPercentage) throws InvalidHealthDataException;
 
-    public double ibwLorentz(double height);
+	/**
+	 * Calculate the Ideal Body Weight (IBW) of a person with the Lorentz formula:
+	 * @param height 	Height of the person (cm).
+	 * @return	  		The Ideal Body Weight of the person (kg).	
+	 * @throws InvalidHealthDataException
+	 * Fórmula:
+	 * IBW = (altura - 100) - ((altura - 150) / 4) para hombres
+	 * IBW = (altura - 100) - ((altura - 150) / 2) para mujeres
+	 */
+
+    public double ibwLorentz(double height,char gender) throws InvalidHealthDataException;
+
 }
